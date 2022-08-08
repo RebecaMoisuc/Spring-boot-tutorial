@@ -1,0 +1,59 @@
+server:
+  port: '8080'
+
+spring:
+  profiles:
+    active: qa
+---
+
+spring:
+  profiles: dev
+  datasource:
+    username: root
+    url: jdbc:mysql://localhost:3306/departments-dev
+    password: Admitere2019#
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+welcome:
+  message: Welcome to daily code buffer
+
+---
+spring:
+  config:
+    activate:
+      on-profile: 'qa'
+  datasource:
+    username: root
+    url: jdbc:mysql://localhost:3306/departments-qa
+    password: Admitere2019#
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+welcome:
+  message: Welcome to daily code buffer
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env, beans"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: 'prod'
+  datasource:
+    username: root
+    url: jdbc:mysql://localhost:3306/departments-prod
+    password: Admitere2019#
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+welcome:
+  message: Welcome to daily code buffer
